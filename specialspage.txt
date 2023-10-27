@@ -1,0 +1,95 @@
+package com.qa.opencart.pages;
+
+import com.microsoft.playwright.FileChooser;
+import com.microsoft.playwright.Locator;
+import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.SelectOption;
+
+import java.nio.file.Paths;
+
+public class SpecialsPage {
+
+    private Page page;
+
+     //locators
+    private static final String addToCart = "(//span[text()='Add to Cart'])[1]";
+    private static final String radioButton ="div[class='radio'] [type='radio']";
+    private static final String checkboxButton ="//input[@value='10']";
+    private static final String text ="id=input-option208";
+    private static final String dropDownLocator ="id=input-option217";
+    private static final String textArea ="id=input-option209";
+    private static final String uploadFile ="button[type='button'][id='button-upload222']";
+    private static final String date="id=input-option219";
+    private static final String time="id=input-option221";
+    private static final String dateAndTime="//input[@id='input-option220']";
+    private static final String quantity="id=input-quantity";
+    private static final String addToCartFinal="id=button-cart";
+    private static final String shoppingCart="//div[@id='top-links']//span[text()='Shopping Cart']";
+    private static final String shoppingCartText="//div[@id='content']/h1[contains(text(),'Shopping Cart')]";
+    private static final String checkOutCart="//div[@class='pull-right']/a[position()=1]";
+
+
+    //constructor
+    public SpecialsPage(Page page) {
+        this.page = page;
+    }
+
+    //actions
+
+    public String getSpecialsPageTitle(){
+        return page.title();
+    }
+
+    public void addToCartClick(){
+        page.click(addToCart);
+    }
+
+    public void radioButtonClick(){
+        page.click(radioButton);
+    }
+
+    public void checkBoxClick(){
+        page.click(checkboxButton);
+    }
+
+    public void text(String enterText){
+        page.fill(text,enterText);
+    }
+    public void dropDownSelect(int value){
+      Locator dropDown = page.locator(dropDownLocator);
+      dropDown.selectOption(new SelectOption().setIndex(value));
+    }
+    public void textArea(String textAreaValue){
+        page.fill(textArea,textAreaValue);
+    }
+    public void fileUpload(String filename){
+        FileChooser fileChooser = page.waitForFileChooser(()->{
+            page.locator(uploadFile).click();
+        });
+        fileChooser.setFiles(Paths.get("Assignments.txt"));
+    }
+    public void date(String dateValue){
+        page.fill(date,dateValue);
+    }
+    public void time(String timeValue){
+        page.fill(time,timeValue);
+    }
+    public void dateAndTime(String dateAndTimeValue){
+        page.fill(dateAndTime,dateAndTimeValue);
+    }
+    public void quantity(String quantityValue){
+        page.fill(quantity,quantityValue);
+    }
+    public void click(){
+        page.click(addToCartFinal);
+    }
+    public void shoppingCart(){
+        page.click(shoppingCart);
+    }
+    public boolean ShoppingCartText(){
+       return page.isVisible(shoppingCartText);
+    }
+    public void checkOutCart(){
+        page.click(checkOutCart);
+    }
+}

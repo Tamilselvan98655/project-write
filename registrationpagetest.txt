@@ -1,0 +1,40 @@
+package com.qa.opencarttest;
+
+import com.qa.opencart.Base.BaseTest;
+import com.qa.opencart.constants.AppConstants;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+public class RegistrationTest extends BaseTest {
+
+    @Test(priority = 1)
+    public void registrationNavigateTest(){
+        registrationPage =  homePage.navigateToRegistrationPage();
+        String actualRegTitle =registrationPage.getRegistrationPageTitle();
+        System.out.println("Registration Page Title is :"+ actualRegTitle);
+        Assert.assertEquals(actualRegTitle, AppConstants.REGISTRATION_PAGE_TITLE);
+    }
+    @Test(priority = 2)
+    public void registrationSuccessTest(){
+        registrationPage.MyAccount();
+        registrationPage.Register();
+        registrationPage.Firstfill("anbu");
+        registrationPage.lastFill("raja");
+        registrationPage.Mail("zqkulad@waterisne.com");
+        registrationPage.Telephone("1234567890");
+        registrationPage.password("playwright");
+        registrationPage.ConfirmPass("playwright");
+        registrationPage.Subscribe();
+        registrationPage.Agree();
+        registrationPage.Continue();
+        boolean successMessage = registrationPage.getHeading();
+        System.out.println("REGISTRATION SUCCESSFULL:" + successMessage);
+        Assert.assertTrue(successMessage, "Success message not displayed");
+        registrationPage.clickContinue();
+        String myAccount = registrationPage.verifyMyAcc();
+        System.out.println("MY ACCOUNT PAGE SHOWED:" + myAccount);
+        Assert.assertEquals(myAccount,AppConstants.ACCOUNT_PAGE_TITLE);
+
+    }
+
+}

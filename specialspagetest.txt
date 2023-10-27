@@ -1,0 +1,35 @@
+package com.qa.opencarttest;
+
+import com.qa.opencart.Base.BaseTest;
+import com.qa.opencart.constants.AppConstants;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+public class SpecialsPageTest extends BaseTest {
+
+    @Test(priority = 1)
+    public void SpecialsNavigationTest(){
+        specialsPage = homePage.navigateToSpecials();
+        String actualSpecialPageTitle = specialsPage.getSpecialsPageTitle();
+        System.out.println("SpecialPageTitle is :"+actualSpecialPageTitle);
+        Assert.assertEquals(actualSpecialPageTitle, AppConstants.SPECIALS_PAGE_TITLE);
+    }
+    @Test(priority = 2)
+    public void specialProduct1Test(){
+        specialsPage.addToCartClick();
+        specialsPage.radioButtonClick();
+        specialsPage.checkBoxClick();
+        specialsPage.text("hi everyone");
+        specialsPage.dropDownSelect(2);
+        specialsPage.textArea("how are you");
+        specialsPage.fileUpload("Assignments.txt");
+        specialsPage.date("2014-02-07");
+        specialsPage.time("18:25");
+        specialsPage.dateAndTime("2014-02-07 18:25");
+        specialsPage.quantity("2");
+        specialsPage.click();
+        specialsPage.shoppingCart();
+        specialsPage.ShoppingCartText();
+        specialsPage.checkOutCart();
+    }
+}

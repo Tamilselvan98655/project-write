@@ -1,0 +1,91 @@
+package com.qa.opencart.pages;
+
+import com.microsoft.playwright.Page;
+
+public class RegistrationPage {
+    private Page page;
+    private static final String myAccountLink = "a[title='My Account']";
+    private static final String register = "//a[text()='Register']";
+    private static final String firstname = "input#input-firstname";
+    private static final String lastname = "input#input-lastname";
+    private static final String email = "input#input-email";
+    private static final String telephone = "input#input-telephone";
+    private static final String passwords = "input#input-password";
+    private static final String confirmPassword = "input#input-confirm";
+    private static final String checkbox = "(//input[@name='newsletter'])[2]";
+    private static final String agree = "input[name='agree']";
+    private static final String continue1 = "input[type='submit']";
+    private static final String successRegisterText = "div#content h1";
+    private static final String continue2 = "//a[text()='Continue']";
+
+    public RegistrationPage(Page page) {
+        this.page = page;
+    }
+
+    //actions
+
+    public String getRegistrationPageTitle(){
+        return page.title();
+    }
+
+    public void MyAccount() {
+        page.click(myAccountLink);
+    }
+
+    public void Register() {
+        page.click(register);
+    }
+
+
+    public void Firstfill(String first) {
+        page.fill(firstname, first);
+
+    }
+
+    public void lastFill(String last) {
+        page.fill(lastname, last);
+    }
+
+    public void Mail(String mail) {
+        page.fill(email, mail);
+
+    }
+
+    public void Telephone(String num) {
+        page.fill(telephone, num);
+
+    }
+
+    public void password(String pass) {
+        page.fill(passwords, pass);
+    }
+
+    public void ConfirmPass(String confirmPass) {
+        page.fill(confirmPassword, confirmPass);
+    }
+
+    public void Subscribe() {
+        page.click(checkbox);
+    }
+
+    public void Agree() {
+        page.click(agree);
+    }
+
+    public void Continue() {
+
+        page.click(continue1);
+    }
+    public boolean getHeading() {
+
+        return page.isVisible(successRegisterText);
+    }
+    public String verifyMyAcc() {
+
+       return page.title();
+    }
+    public void clickContinue() {
+        page.click(continue2);
+    }
+
+}

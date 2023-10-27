@@ -1,0 +1,29 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="InitialSuit" thread-count="4" parallel="tests" verbose="4">
+    <listeners>
+        <listener class-name="com.qa.listeners.ExtentReportListener"></listener>
+    </listeners>
+
+    <test name="OpenCartTest1">
+        <classes>
+            <class name="com.qa.opencarttest.HomePageTest"/>
+        </classes>
+    </test>
+    <test name="OpenCartTest2">
+        <classes>
+            <class name="com.qa.opencarttest.RegistrationTest"/>
+        </classes>
+    </test>
+    <test name="OpenCartTest3">
+        <classes>
+            <class name="com.qa.opencarttest.LoginPageTest"/>
+        </classes>
+    </test>
+    <test name="OpenCartTest4">
+        <classes>
+            <class name="com.qa.opencarttest.SpecialsPageTest"/>
+        </classes>
+    </test>
+
+</suite>

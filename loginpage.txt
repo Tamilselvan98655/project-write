@@ -1,0 +1,51 @@
+package com.qa.opencart.pages;
+
+import com.microsoft.playwright.Page;
+import org.testng.Assert;
+
+public class LoginPage  {
+
+    private   Page page;
+
+    private static final String emailId = "//input[@name='email']";
+    private static final String password = "//input[@name='password']";
+    private static final String loginLink = "input[type='submit']";
+    private static final String forgotPasswordLink = "(//a[text()='Forgotten Password'])[1]";
+    private static final String logOutLink = "(//a[text()='Logout'])[2]";
+    //2.page constructor
+    public LoginPage(Page page) {
+        this.page = page;
+    }
+    //3.page actions
+
+    public String getLoginPageTitle(){
+         return page.title();
+
+    }
+    public boolean isForgotPwdLinkExist(){
+       return page.isVisible(forgotPasswordLink);
+    }
+
+    public boolean doLogin(String appUserName,String appPassword) throws InterruptedException {
+        System.out.println("App credentials:"+appUserName + ":" +appPassword);
+        page.fill(emailId,appUserName);
+        page.fill(password,appPassword);
+        page.click(loginLink);
+        Thread.sleep(4000);
+        if (page.isVisible(logOutLink)){
+            System.out.println("User loggedin Succcessfully.....");
+            return true;
+        }
+        return false;
+    }
+
+    public String getAccountPageTitle(){
+      return page.title();
+    }
+
+
+
+
+
+
+}

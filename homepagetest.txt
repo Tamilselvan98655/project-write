@@ -1,0 +1,101 @@
+package com.qa.opencarttest;
+
+import com.microsoft.playwright.Page;
+import com.qa.opencart.Base.BaseTest;
+import com.qa.opencart.constants.AppConstants;
+import org.testng.Assert;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
+
+public class HomePageTest extends BaseTest {
+
+    @Test(priority = 1)
+    public void getHomePageTitle() {
+        String actualTitle = homePage.getHomepageTitle();
+        Assert.assertEquals(actualTitle, AppConstants.HOME_PAGE_TITLE);
+    }
+    @Test(priority = 2)
+    public void getHomePageUrl(){
+       String actualUrl = homePage.getHomepageURL();
+       Assert.assertEquals(actualUrl,prop.getProperty("url"));
+    }
+
+    @DataProvider
+    public Object[][] getProductData(){
+        return new  Object[][]{
+
+                { "Macbook"},
+                {"IMac"},
+               {"Samsung"}
+        };
+    }
+    @Test(priority = 3,dataProvider = "getProductData")
+    public void searchTest(String productname){
+      String actualProductName =  homePage.doSearch(productname);
+      Assert.assertEquals(actualProductName,"Search - "+productname);
+    }
+
+
+//    @Test(priority = 1)
+//    public void registrationTest() {
+//        String title1 = homePage.getHomepageTitle();
+//        System.out.println("Title name is:" + title1);
+//        String url1 = homePage.getHomepageURL();
+//        System.out.println("Url of the page is:" + url1);
+//        homePage.MyAccount();
+//        homePage.Register();
+//        homePage.Firstfill("anbu");
+//        homePage.lastFill("raja");
+//        homePage.Mail("zxcvbnc@waterisgone.com");
+//        homePage.Telephone("1234567890");
+//        homePage.password("playwright");
+//        homePage.ConfirmPass("playwright");
+//        homePage.Subscribe();
+//        homePage.Agree();
+//        homePage.Continue();
+//        boolean successMessage = homePage.getHeading();
+//        System.out.println("REGISTRATION SUCCESSFULL:" + successMessage);
+//        Assert.assertTrue(successMessage, "Success message not displayed");
+//        homePage.clickContinue();
+//        boolean myAccount = homePage.verifyMyAcc();
+//        System.out.println("MY ACCOUNT PAGE SHOWED:" + myAccount);
+//        Assert.assertTrue(myAccount, "My acc not displayed after register");
+//    }
+//    @Test(priority = 2)
+//    public void logOutTest() {
+//        homePage.myAccount2();
+//        homePage.logOuts();
+//        homePage.logOutText1();
+//        boolean text2 = homePage.logOutText1();
+//        Assert.assertTrue(text2, "Logout Text not shown");
+//        System.out.println("LOGGED OUT SUCCESSFULLY:" + text2);
+//    }
+//    @Test(priority = 3)
+//    public void loginTest() {
+//        homePage.MyAccount();
+//        homePage.login();
+//        homePage.loginUser("anbuvanan98@gmail.com");
+//        homePage.loginPass("Playwright@123");
+//        homePage.clickToLogin();
+//        boolean text1 = homePage.myAccountText();
+//        Assert.assertTrue(text1, "My account text not shown");
+//        System.out.println("LOGIN SUCCESSFULL :" + text1);
+//    }
+//    @Test(priority = 4)
+//    public void addToCartTest() {
+//        homePage.clickCamera();
+//        homePage.clickAddtoCart2();
+//        boolean text3 = homePage.addToCartSuccess();
+//        Assert.assertTrue(text3, "Item not added to cart");
+//        System.out.println("PRODUCT ADDED TO CART:" + text3);
+//    }
+//    @Test(priority = 5)
+//    public void checkOutEmpty() {
+//        homePage.checkOutClick();
+//        homePage.checkOutCancel();
+//        boolean text4 = homePage.emptyCartMessage();
+//        Assert.assertTrue(text4, "Cart is not empty");
+//        System.out.println("CART BECOME EMPTY:" + text4);
+//    }
+
+}

@@ -1,0 +1,183 @@
+package com.qa.opencart.pages;
+
+import com.microsoft.playwright.Page;
+
+public class HomePage {
+   private Page page;
+
+    //1. string locators-object repository
+    private static final String search = "input[type='text']";
+    private static final String searchButton = "(//button[@type='button'])[4]";
+    private static final String searchPageHeader = "div#content h1";
+    private static final String loginLink = "(//a[text()='Login'])[1]";
+    private static final String myAccountLink = "//span[text()='My Account']";
+    private static final String registrationLink = "//a[text()='Register']";
+    private static final String specials = "//a[text()='Specials']";
+
+//
+
+
+
+    //2.page constructor
+    public HomePage(Page page) {
+        this.page = page;
+    }
+
+    //3.page method actions
+    public String getHomepageTitle() {
+        String title =page.title();
+        System.out.println("Title is :"+ title);
+        return page.title().trim();
+    }
+
+    public String getHomepageURL() {
+       String url = page.url();
+        System.out.println("URL is:"+url);
+        return page.url().trim();
+
+    }
+    public String doSearch(String productname){
+        page.fill(search,productname);
+        page.click(searchButton);
+        String header = page.textContent(searchPageHeader);
+        System.out.println("Page header is:"+ header);
+        return header;
+    }
+    public RegistrationPage navigateToRegistrationPage(){
+        page.click(myAccountLink);
+        page.click(registrationLink);
+        return new RegistrationPage(page);
+
+    }
+
+    public LoginPage naviagateToLoginPage() {
+        page.click(myAccountLink);
+        page.click(loginLink);
+        return new LoginPage(page);
+
+    }
+
+    public SpecialsPage navigateToSpecials(){
+        page.click(specials);
+        return new SpecialsPage(page);
+    }
+
+//    public void MyAccount() {
+//        page.click(myaccount);
+//    }
+//
+//    public void Register() {
+//        page.click(register);
+//    }
+//
+//
+//    public void Firstfill(String first) {
+//        page.fill(firstname, first);
+//
+//    }
+//
+//    public void lastFill(String last) {
+//        page.fill(lastname, last);
+//    }
+//
+//    public void Mail(String mail) {
+//        page.fill(email, mail);
+//
+//    }
+//
+//    public void Telephone(String num) {
+//        page.fill(telephone, num);
+//
+//    }
+//
+//    public void password(String pass) {
+//        page.fill(passwords, pass);
+//    }
+//
+//    public void ConfirmPass(String confirmPass) {
+//        page.fill(confirmpass, confirmPass);
+//    }
+//
+//    public void Subscribe() {
+//        page.click(checkbox);
+//    }
+//
+//    public void Agree() {
+//        page.click(agree);
+//    }
+//
+//    public void Continue() {
+//        page.click(continue1);
+//    }
+//
+//    public void clickContinue() {
+//        page.click(continue2);
+//    }
+//
+//
+//    public void logOuts() {
+//        page.click(logout);
+//    }
+
+//    public void myAccount2() {
+//        page.click(myaccount);
+//    }
+
+
+
+//    public void loginUser(String value) {
+//        page.fill(loginuser,value);
+//
+//    }
+//
+//    public void loginPass(String value) {
+//        page.fill(loginpass,value);
+//    }
+//
+//    public void clickToLogin() {
+//
+//        page.click(clickstologin);
+//    }
+//
+//    public boolean getHeading() {
+//
+//        return page.isVisible(successRegisterText);
+//    }
+//
+//    public boolean verifyMyAcc() {
+//
+//        return page.isVisible(myaccount);
+//    }
+//
+//    public boolean myAccountText() {
+//        return page.isVisible(myacctext);
+//    }
+//
+//    public boolean logOutText1() {
+//        return page.isVisible(logouttext);
+//    }
+//
+//    public void clickCamera() {
+//        page.click(camera);
+//    }
+//
+//    public void clickAddtoCart2() {
+//        page.click(addtocart2);
+//    }
+//
+//    public boolean addToCartSuccess() {
+//        return page.isVisible(addtocart2text);
+//    }
+//
+//    public void checkOutClick() {
+//        page.click(checkout);
+//    }
+//
+//    public void checkOutCancel() {
+//        page.click(checkoutcancel);
+//    }
+//
+//    public boolean emptyCartMessage() {
+//        return page.isVisible(emptycartMessage);
+//    }
+}
